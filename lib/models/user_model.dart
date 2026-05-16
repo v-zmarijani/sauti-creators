@@ -32,14 +32,14 @@ class UserModel {
         name: map['name'] as String,
         username: map['username'] as String,
         email: map['email'] as String,
-        avatarUrl: map['avatarUrl'] as String?,
+        avatarUrl: map['avatar_url'] as String?,
         bio: map['bio'] as String?,
-        followersCount: (map['followersCount'] as int?) ?? 0,
-        followingCount: (map['followingCount'] as int?) ?? 0,
-        postsCount: (map['postsCount'] as int?) ?? 0,
-        isVerified: (map['isVerified'] as bool?) ?? false,
-        totalEarnings: ((map['totalEarnings'] as num?) ?? 0).toDouble(),
-        createdAt: DateTime.parse(map['createdAt'] as String),
+        followersCount: (map['followers_count'] as int?) ?? 0,
+        followingCount: (map['following_count'] as int?) ?? 0,
+        postsCount: (map['posts_count'] as int?) ?? 0,
+        isVerified: (map['is_verified'] as bool?) ?? false,
+        totalEarnings: ((map['total_earnings'] as num?) ?? 0).toDouble(),
+        createdAt: DateTime.parse(map['created_at'] as String),
       );
 
   Map<String, dynamic> toMap() => {
@@ -47,14 +47,14 @@ class UserModel {
         'name': name,
         'username': username,
         'email': email,
-        'avatarUrl': avatarUrl,
+        'avatar_url': avatarUrl,
         'bio': bio,
-        'followersCount': followersCount,
-        'followingCount': followingCount,
-        'postsCount': postsCount,
-        'isVerified': isVerified,
-        'totalEarnings': totalEarnings,
-        'createdAt': createdAt.toIso8601String(),
+        'followers_count': followersCount,
+        'following_count': followingCount,
+        'posts_count': postsCount,
+        'is_verified': isVerified,
+        'total_earnings': totalEarnings,
+        'created_at': createdAt.toIso8601String(),
       };
 
   UserModel copyWith({

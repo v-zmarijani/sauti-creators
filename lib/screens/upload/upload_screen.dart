@@ -1,6 +1,13 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
+import '../../providers/auth_provider.dart';
+import '../../providers/feed_provider.dart';
+import '../../models/post_model.dart';
+import '../../supabase/supabase_client.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 
@@ -32,10 +39,40 @@ class _UploadScreenState extends State<UploadScreen> {
   Future<void> _post() async {
     if (_mediaFile == null && _captionCtrl.text.isEmpty) return;
     setState(() => _loading = true);
-    await Future.delayed(const Duration(seconds: 1)); // TODO: upload to Firebase Storage
-    if (mounted) {
-      context.go('/feed');
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Post published!'), backgroundColor: AppColors.primaryLight));
+
+    try {
+      String? mediaUrl;
+
+      if (_mediaFile != null) {
+        final ext = _mediaFile!.path.split('.').last;
+        final fileName = '${const Uuid().v4()}.$ext';
+        final bucket = _isVideo ? 'videos' : 'images';
+        final bytes = await File(_mediaFile!.path).readAsBytes();
+
+        await supabase.storage.from(bucket).uploadBinary(fileName, bytes, fileOptions: FileOptions(contentType: _isVideo ? 'video/$ext' : 'image/$ext'));
+        mediaUrl = supabase.storage.from(bucket).getPublicUrl(fileName);
+      }
+
+      final user = context.read<AuthProvider>().currentUser;
+      if (user == null) return;
+
+      await context.read<FeedProvider>().createPost(
+            creatorId: user.id,
+            caption: _captionCtrl.text.trim().isEmpty ? null : _captionCtrl.text.trim(),
+            mediaUrl: mediaUrl,
+            type: _isVideo ? PostType.video : (_mediaFile != null ? PostType.image : PostType.text),
+          );
+
+      if (mounted) {
+        context.go('/feed');
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Post published!'), backgroundColor: AppColors.primaryLight));
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Upload failed: $e'), backgroundColor: AppColors.error));
+      }
+    } finally {
+      if (mounted) setState(() => _loading = false);
     }
   }
 
