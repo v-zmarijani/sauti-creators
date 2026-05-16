@@ -15,7 +15,7 @@ class FeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.colors.background,
       body: ChangeNotifierProvider(
         create: (_) => FeedProvider(),
         child: CustomScrollView(
@@ -248,7 +248,7 @@ class _ActionBtn extends StatelessWidget {
   Widget build(BuildContext context) => CupertinoButton(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         onPressed: onTap,
-        minSize: 0,
+        minimumSize: Size.zero,
         child: Row(
           children: [
             Icon(icon, color: color, size: 20),

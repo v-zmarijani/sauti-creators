@@ -46,11 +46,11 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.colors.background,
       body: NestedScrollView(
         headerSliverBuilder: (_, __) => [
           SliverAppBar(
-            backgroundColor: AppColors.background,
+            backgroundColor: context.colors.background,
             elevation: 0,
             pinned: true,
             leading: _isOwnProfile ? null : CupertinoButton(
@@ -220,7 +220,7 @@ class _TabDelegate extends SliverPersistentHeaderDelegate {
   _TabDelegate(this.tabBar);
 
   @override
-  Widget build(_, __, ___) => Container(color: AppColors.background, child: tabBar);
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) => Container(color: context.colors.background, child: tabBar);
   @override
   double get maxExtent => tabBar.preferredSize.height;
   @override

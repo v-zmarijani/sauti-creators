@@ -18,7 +18,7 @@ class NotificationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.colors.background,
       appBar: AppBar(title: Text(l10n.notifications)),
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
@@ -55,7 +55,7 @@ class _NotifTile extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(notif.title, style: const TextStyle(color: Colors.white, fontSize: 13)),
+              Text(notif.title, style: TextStyle(color: context.colors.onBackground, fontSize: 13)),
               const SizedBox(height: 2),
               Text(notif.time, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
             ])),

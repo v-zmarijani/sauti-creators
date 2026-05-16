@@ -40,6 +40,12 @@ dependencies:
   # Auth
   google_sign_in: ^6.2.2
 
+  # OTA updates
+  upgrader: ^11.4.0
+  package_info_plus: ^8.3.0
+  http: ^1.6.0
+  url_launcher: ^6.3.1
+
   # Utils
   uuid: ^4.5.1
   connectivity_plus: ^6.1.0

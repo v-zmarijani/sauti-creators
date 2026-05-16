@@ -9,7 +9,7 @@ class EarningsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.colors.background,
       appBar: AppBar(title: Text(l10n.earnings)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -107,7 +107,7 @@ class _TransactionTile extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(transaction.name, style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.white)),
+              Text(transaction.name, style: TextStyle(fontWeight: FontWeight.w600, color: context.colors.onBackground)),
               Text(transaction.time, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
             ])),
             Text(transaction.amount, style: const TextStyle(fontWeight: FontWeight.w700, color: AppColors.primary)),

@@ -56,7 +56,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.colors.background,
       body: SafeArea(
         child: Column(
           children: [
@@ -156,7 +156,7 @@ class _LanguagePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.colors.background,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(32),

@@ -49,7 +49,7 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.colors.background,
       appBar: AppBar(
         leading: IconButton(icon: const Icon(Icons.arrow_back_ios), onPressed: () => context.go('/login')),
         title: Text(l10n.signup),
@@ -64,14 +64,14 @@ class _SignupScreenState extends State<SignupScreen> {
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _nameCtrl,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                   decoration: InputDecoration(hintText: l10n.name, prefixIcon: const Icon(Icons.person_outline, color: AppColors.textSecondary)),
                   validator: (v) => v != null && v.length >= 2 ? null : 'Enter your full name',
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _usernameCtrl,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                   decoration: InputDecoration(hintText: l10n.username, prefixIcon: const Icon(Icons.alternate_email, color: AppColors.textSecondary)),
                   validator: (v) => v != null && v.length >= 3 ? null : 'Username must be 3+ characters',
                 ),
@@ -79,7 +79,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 TextFormField(
                   controller: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                   decoration: InputDecoration(hintText: l10n.email, prefixIcon: const Icon(Icons.email_outlined, color: AppColors.textSecondary)),
                   validator: (v) => v != null && v.contains('@') ? null : 'Enter a valid email',
                 ),
@@ -87,7 +87,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 TextFormField(
                   controller: _passCtrl,
                   obscureText: _obscure,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                   decoration: InputDecoration(
                     hintText: l10n.password,
                     prefixIcon: const Icon(Icons.lock_outline, color: AppColors.textSecondary),

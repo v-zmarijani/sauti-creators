@@ -82,7 +82,7 @@ class _UploadScreenState extends State<UploadScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.colors.background,
       appBar: AppBar(
         leading: IconButton(icon: const Icon(Icons.close), onPressed: () => context.pop()),
         title: Text(l10n.uploadPost),
@@ -144,7 +144,7 @@ class _UploadScreenState extends State<UploadScreen> {
             TextField(
               controller: _captionCtrl,
               maxLines: 4,
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
               decoration: InputDecoration(hintText: l10n.addCaption, alignLabelWithHint: true),
             ),
             const SizedBox(height: 24),
@@ -165,9 +165,9 @@ class _UploadScreenState extends State<UploadScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(margin: const EdgeInsets.symmetric(vertical: 8), width: 40, height: 4, decoration: BoxDecoration(color: AppColors.divider, borderRadius: BorderRadius.circular(2))),
-            ListTile(leading: const Icon(Icons.photo_library_outlined, color: AppColors.primary), title: Text(l10n.chooseFromGallery, style: const TextStyle(color: Colors.white)), onTap: () { Navigator.pop(context); _pickMedia(ImageSource.gallery); }),
-            ListTile(leading: const Icon(Icons.camera_alt_outlined, color: AppColors.primary), title: Text(l10n.takePhoto, style: const TextStyle(color: Colors.white)), onTap: () { Navigator.pop(context); _pickMedia(ImageSource.camera); }),
-            ListTile(leading: const Icon(Icons.videocam_outlined, color: AppColors.primary), title: Text(l10n.recordVideo, style: const TextStyle(color: Colors.white)), onTap: () { Navigator.pop(context); _pickMedia(ImageSource.camera, video: true); }),
+            ListTile(leading: const Icon(Icons.photo_library_outlined, color: AppColors.primary), title: Text(l10n.chooseFromGallery, style: TextStyle(color: context.colors.onBackground)), onTap: () { Navigator.pop(context); _pickMedia(ImageSource.gallery); }),
+            ListTile(leading: const Icon(Icons.camera_alt_outlined, color: AppColors.primary), title: Text(l10n.takePhoto, style: TextStyle(color: context.colors.onBackground)), onTap: () { Navigator.pop(context); _pickMedia(ImageSource.camera); }),
+            ListTile(leading: const Icon(Icons.videocam_outlined, color: AppColors.primary), title: Text(l10n.recordVideo, style: TextStyle(color: context.colors.onBackground)), onTap: () { Navigator.pop(context); _pickMedia(ImageSource.camera, video: true); }),
             const SizedBox(height: 8),
           ],
         ),

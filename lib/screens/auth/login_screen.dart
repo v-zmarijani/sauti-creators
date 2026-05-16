@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.colors.background,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextFormField(
                   controller: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                   decoration: InputDecoration(
                     hintText: l10n.email,
                     prefixIcon: const Icon(Icons.email_outlined, color: AppColors.textSecondary),
@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextFormField(
                   controller: _passCtrl,
                   obscureText: _obscure,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                   decoration: InputDecoration(
                     hintText: l10n.password,
                     prefixIcon: const Icon(Icons.lock_outline, color: AppColors.textSecondary),
