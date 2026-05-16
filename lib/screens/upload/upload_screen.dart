@@ -7,6 +7,7 @@ import 'package:uuid/uuid.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/feed_provider.dart';
 import '../../models/post_model.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../supabase/supabase_client.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
@@ -53,6 +54,7 @@ class _UploadScreenState extends State<UploadScreen> {
         mediaUrl = supabase.storage.from(bucket).getPublicUrl(fileName);
       }
 
+      if (!mounted) return;
       final user = context.read<AuthProvider>().currentUser;
       if (user == null) return;
 

@@ -27,7 +27,7 @@ class SettingsScreen extends StatelessWidget {
             title: Text(isSwahili ? l10n.swahili : l10n.english, style: const TextStyle(color: Colors.white)),
             subtitle: Text(isSwahili ? 'Bonyeza kubadilisha lugha' : 'Tap to switch language', style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
             secondary: const Icon(Icons.language, color: AppColors.primaryLight),
-            activeColor: AppColors.primaryLight,
+            activeThumbColor: AppColors.primaryLight,
           ),
           const Divider(),
           _SectionHeader(title: 'Account'),

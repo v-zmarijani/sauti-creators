@@ -50,7 +50,7 @@ class _NotifTile extends StatelessWidget {
             Container(
               width: 44,
               height: 44,
-              decoration: BoxDecoration(color: notif.color.withOpacity(0.15), shape: BoxShape.circle),
+              decoration: BoxDecoration(color: notif.color.withValues(alpha: 0.15), shape: BoxShape.circle),
               child: Icon(notif.icon, color: notif.color, size: 22),
             ),
             const SizedBox(width: 12),

@@ -102,7 +102,7 @@ class _TransactionTile extends StatelessWidget {
             Container(
               width: 40,
               height: 40,
-              decoration: BoxDecoration(color: AppColors.tip.withOpacity(0.15), shape: BoxShape.circle),
+              decoration: BoxDecoration(color: AppColors.tip.withValues(alpha: 0.15), shape: BoxShape.circle),
               child: Icon(transaction.icon, color: AppColors.tip, size: 20),
             ),
             const SizedBox(width: 12),

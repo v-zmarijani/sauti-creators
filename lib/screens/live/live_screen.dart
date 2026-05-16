@@ -91,7 +91,7 @@ class _LiveScreenState extends State<LiveScreen> {
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                               decoration: BoxDecoration(
-                                color: c.isGold ? AppColors.tip.withOpacity(0.2) : Colors.black38,
+                                color: c.isGold ? AppColors.tip.withValues(alpha: 0.2) : Colors.black38,
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: RichText(
@@ -178,8 +178,8 @@ class _LiveScreenState extends State<LiveScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   decoration: BoxDecoration(
-                    color: AppColors.tip.withOpacity(0.15),
-                    border: Border.all(color: AppColors.tip.withOpacity(0.5)),
+                    color: AppColors.tip.withValues(alpha: 0.15),
+                    border: Border.all(color: AppColors.tip.withValues(alpha: 0.5)),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text('Tsh $a', style: const TextStyle(color: AppColors.tip, fontWeight: FontWeight.w600)),
