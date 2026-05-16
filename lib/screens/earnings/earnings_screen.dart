@@ -96,7 +96,7 @@ class _TransactionTile extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(12)),
+        decoration: BoxDecoration(color: context.colors.surface, borderRadius: BorderRadius.circular(12)),
         child: Row(
           children: [
             Container(

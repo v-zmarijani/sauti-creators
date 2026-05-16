@@ -52,11 +52,11 @@ class _SautiAppBar extends StatelessWidget {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
             child: Container(
-              color: AppColors.surface.withValues(alpha: 0.88),
+              color: context.colors.surface.withValues(alpha: 0.88),
               padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top, left: 16, right: 16, bottom: 10),
               child: Row(
                 children: [
-                  Text('Sauti', style: GoogleFonts.dmSans(fontSize: 28, fontWeight: FontWeight.w700, color: AppColors.onBackground, letterSpacing: -0.5)),
+                  Text('Sauti', style: GoogleFonts.dmSans(fontSize: 28, fontWeight: FontWeight.w700, color: context.colors.onBackground, letterSpacing: -0.5)),
                   const Spacer(),
                   _IconBtn(icon: CupertinoIcons.video_camera, onTap: () => context.push('/live/demo_channel'),
                       badge: Container(width: 8, height: 8, decoration: const BoxDecoration(color: AppColors.live, shape: BoxShape.circle))),
@@ -87,8 +87,8 @@ class _IconBtn extends StatelessWidget {
           children: [
             Container(
               width: 36, height: 36,
-              decoration: BoxDecoration(color: AppColors.surfaceVariant, shape: BoxShape.circle),
-              child: Icon(icon, size: 18, color: AppColors.onBackground),
+              decoration: BoxDecoration(color: context.colors.surfaceVariant, shape: BoxShape.circle),
+              child: Icon(icon, size: 18, color: context.colors.onBackground),
             ),
             if (badge != null) Positioned(top: 0, right: 0, child: badge!),
           ],
@@ -124,7 +124,7 @@ class _LiveStrip extends StatelessWidget {
                   children: [
                     CreatorAvatar(name: name, radius: 28, isLive: isLive),
                     const SizedBox(height: 6),
-                    Text(name, style: GoogleFonts.dmSans(fontSize: 11, color: AppColors.onBackground)),
+                    Text(name, style: GoogleFonts.dmSans(fontSize: 11, color: context.colors.onBackground)),
                   ],
                 );
               },
@@ -150,7 +150,7 @@ class _PostCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 14),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colors.surface,
         borderRadius: BorderRadius.circular(18),
         boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, 2))],
       ),
@@ -168,7 +168,7 @@ class _PostCard extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text(post.creatorName, style: GoogleFonts.dmSans(fontWeight: FontWeight.w600, fontSize: 14, color: AppColors.onBackground)),
+                    Text(post.creatorName, style: GoogleFonts.dmSans(fontWeight: FontWeight.w600, fontSize: 14, color: context.colors.onBackground)),
                     Text('@${post.creatorUsername}', style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.textSecondary)),
                   ]),
                 ),
@@ -183,7 +183,7 @@ class _PostCard extends StatelessWidget {
               borderRadius: const BorderRadius.vertical(top: Radius.zero),
               child: Container(
                 height: 240,
-                color: AppColors.surfaceVariant,
+                color: context.colors.surfaceVariant,
                 child: Center(
                   child: Icon(post.type == PostType.video ? CupertinoIcons.play_circle : CupertinoIcons.photo, size: 52, color: AppColors.textTertiary),
                 ),
@@ -192,7 +192,7 @@ class _PostCard extends StatelessWidget {
           if (post.caption != null)
             Padding(
               padding: const EdgeInsets.fromLTRB(14, 10, 14, 4),
-              child: Text(post.caption!, style: GoogleFonts.dmSans(fontSize: 14, color: AppColors.onSurface, height: 1.4)),
+              child: Text(post.caption!, style: GoogleFonts.dmSans(fontSize: 14, color: context.colors.onSurface, height: 1.4)),
             ),
           Padding(
             padding: const EdgeInsets.fromLTRB(6, 6, 6, 10),
@@ -229,7 +229,7 @@ class _FollowChipState extends State<_FollowChip> {
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
           decoration: BoxDecoration(
-            color: _following ? AppColors.surfaceVariant : AppColors.primary,
+            color: _following ? context.colors.surfaceVariant : AppColors.primary,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(_following ? 'Following' : 'Follow', style: GoogleFonts.dmSans(fontSize: 12, fontWeight: FontWeight.w600, color: _following ? AppColors.textSecondary : Colors.white)),

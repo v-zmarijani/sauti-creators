@@ -54,8 +54,8 @@ class SautiColors {
     background: Color(0xFFF2F2F7),
     surface: Color(0xFFFFFFFF),
     surfaceVariant: Color(0xFFE5E5EA),
-    onBackground: Color(0xFF1C1C1E),
-    onSurface: Color(0xFF1C1C1E),
+    onBackground: Color(0xFF000000),
+    onSurface: Color(0xFF000000),
     textSecondary: Color(0xFF8E8E93),
     textTertiary: Color(0xFFC7C7CC),
     divider: Color(0xFFC6C6C8),
@@ -109,8 +109,8 @@ class AppColors {
   static const background = Color(0xFFF2F2F7);
   static const surface = Color(0xFFFFFFFF);
   static const surfaceVariant = Color(0xFFE5E5EA);
-  static const onBackground = Color(0xFF1C1C1E);
-  static const onSurface = Color(0xFF1C1C1E);
+  static const onBackground = Color(0xFF000000);
+  static const onSurface = Color(0xFF000000);
   static const textSecondary = Color(0xFF8E8E93);
   static const textTertiary = Color(0xFFC7C7CC);
   static const divider = Color(0xFFC6C6C8);

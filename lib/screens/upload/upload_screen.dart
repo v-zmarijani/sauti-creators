@@ -103,7 +103,7 @@ class _UploadScreenState extends State<UploadScreen> {
               child: Container(
                 height: 220,
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceVariant,
+                  color: context.colors.surfaceVariant,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: AppColors.divider),
                 ),
@@ -122,7 +122,7 @@ class _UploadScreenState extends State<UploadScreen> {
                         fit: StackFit.expand,
                         children: [
                           Container(
-                            decoration: BoxDecoration(color: AppColors.surfaceVariant, borderRadius: BorderRadius.circular(16)),
+                            decoration: BoxDecoration(color: context.colors.surfaceVariant, borderRadius: BorderRadius.circular(16)),
                             child: Center(child: Icon(_isVideo ? Icons.video_file_outlined : Icons.image_outlined, size: 52, color: AppColors.primary)),
                           ),
                           Positioned(
@@ -158,7 +158,7 @@ class _UploadScreenState extends State<UploadScreen> {
   void _showMediaPicker(BuildContext context, AppLocalizations l10n) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppColors.surface,
+      backgroundColor: context.colors.surface,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (_) => SafeArea(
         child: Column(

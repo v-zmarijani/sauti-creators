@@ -171,7 +171,7 @@ class _GoogleSignInButton extends StatelessWidget {
         child: Container(
           height: 52,
           decoration: BoxDecoration(
-            color: AppColors.surface,
+            color: context.colors.surface,
             borderRadius: BorderRadius.circular(14),
             border: Border.all(color: AppColors.divider),
             boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2))],
@@ -181,7 +181,7 @@ class _GoogleSignInButton extends StatelessWidget {
             children: [
               Text('G', style: GoogleFonts.dmSans(fontSize: 20, fontWeight: FontWeight.w700, color: const Color(0xFF4285F4))),
               const SizedBox(width: 10),
-              Text('Continue with Google', style: GoogleFonts.dmSans(fontSize: 15, fontWeight: FontWeight.w500, color: AppColors.onBackground)),
+              Text('Continue with Google', style: GoogleFonts.dmSans(fontSize: 15, fontWeight: FontWeight.w500, color: context.colors.onBackground)),
             ],
           ),
         ),

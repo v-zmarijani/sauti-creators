@@ -196,7 +196,7 @@ class _LangOption extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: selected ? AppColors.primary.withValues(alpha: 0.2) : AppColors.surface,
+          color: selected ? AppColors.primary.withValues(alpha: 0.2) : context.colors.surface,
           border: Border.all(color: selected ? AppColors.primary : AppColors.divider, width: selected ? 2 : 1),
           borderRadius: BorderRadius.circular(16),
         ),

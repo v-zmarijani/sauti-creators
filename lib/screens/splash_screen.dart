@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.surface,
+      backgroundColor: context.colors.surface,
       body: Center(
         child: FadeTransition(
           opacity: _fadeAnim,
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   child: const Icon(Icons.mic_rounded, color: Colors.white, size: 48),
                 ),
                 const SizedBox(height: 20),
-                Text('Sauti', style: GoogleFonts.dmSans(fontSize: 34, fontWeight: FontWeight.w700, color: AppColors.onBackground, letterSpacing: -0.5)),
+                Text('Sauti', style: GoogleFonts.dmSans(fontSize: 34, fontWeight: FontWeight.w700, color: context.colors.onBackground, letterSpacing: -0.5)),
                 const SizedBox(height: 4),
                 Text('Creator Platform', style: GoogleFonts.dmSans(fontSize: 15, color: AppColors.textSecondary)),
               ],

@@ -58,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
               child: const Icon(CupertinoIcons.back, color: AppColors.primary),
               onPressed: () => context.pop(),
             ),
-            title: Text(_demoUser.username, style: GoogleFonts.dmSans(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.onBackground)),
+            title: Text(_demoUser.username, style: GoogleFonts.dmSans(fontSize: 16, fontWeight: FontWeight.w600, color: context.colors.onBackground)),
             actions: _isOwnProfile ? [
               CupertinoButton(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -74,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                 CreatorAvatar(name: _demoUser.name, radius: 46),
                 const SizedBox(height: 12),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(_demoUser.name, style: GoogleFonts.dmSans(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.onBackground)),
+                  Text(_demoUser.name, style: GoogleFonts.dmSans(fontSize: 20, fontWeight: FontWeight.w700, color: context.colors.onBackground)),
                   const SizedBox(width: 6),
                   const Icon(Icons.verified_rounded, color: AppColors.verified, size: 18),
                 ]),
@@ -83,7 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: Text(_demoUser.bio, textAlign: TextAlign.center, style: GoogleFonts.dmSans(fontSize: 13, color: AppColors.onSurface, height: 1.4)),
+                  child: Text(_demoUser.bio, textAlign: TextAlign.center, style: GoogleFonts.dmSans(fontSize: 13, color: context.colors.onSurface, height: 1.4)),
                 ),
                 const SizedBox(height: 20),
                 // Stats row
@@ -91,7 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   decoration: BoxDecoration(
-                    color: AppColors.surface,
+                    color: context.colors.surface,
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2))],
                   ),
@@ -163,7 +163,7 @@ class _Stat extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          Text(_fmt(value), style: GoogleFonts.dmSans(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.onBackground)),
+          Text(_fmt(value), style: GoogleFonts.dmSans(fontSize: 20, fontWeight: FontWeight.w700, color: context.colors.onBackground)),
           const SizedBox(height: 2),
           Text(label, style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.textSecondary)),
         ],
@@ -194,7 +194,7 @@ class _IosButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           alignment: Alignment.center,
-          child: Text(label, style: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w600, color: filled ? Colors.white : AppColors.onBackground)),
+          child: Text(label, style: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w600, color: filled ? Colors.white : context.colors.onBackground)),
         ),
       );
 }
@@ -209,7 +209,7 @@ class _Grid extends StatelessWidget {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 1.5, mainAxisSpacing: 1.5),
         itemCount: count,
         itemBuilder: (_, i) => Container(
-          color: AppColors.surfaceVariant,
+          color: context.colors.surfaceVariant,
           child: Center(child: Icon(i % 3 == 0 ? CupertinoIcons.play_fill : CupertinoIcons.photo, color: AppColors.textTertiary, size: 24)),
         ),
       );
