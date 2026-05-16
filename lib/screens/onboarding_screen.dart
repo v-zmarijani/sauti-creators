@@ -89,7 +89,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         width: i == _currentPage ? 24 : 8,
                         height: 8,
                         decoration: BoxDecoration(
-                          color: i == _currentPage ? AppColors.primaryLight : AppColors.divider,
+                          color: i == _currentPage ? AppColors.primary : AppColors.divider,
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -163,7 +163,7 @@ class _LanguagePicker extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.language, size: 64, color: AppColors.primaryLight),
+              const Icon(Icons.language, size: 64, color: AppColors.primary),
               const SizedBox(height: 24),
               Text(l10n.selectLanguage, style: Theme.of(context).textTheme.headlineMedium, textAlign: TextAlign.center),
               const SizedBox(height: 40),
@@ -197,7 +197,7 @@ class _LangOption extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: selected ? AppColors.primary.withValues(alpha: 0.2) : AppColors.surface,
-          border: Border.all(color: selected ? AppColors.primaryLight : AppColors.divider, width: selected ? 2 : 1),
+          border: Border.all(color: selected ? AppColors.primary : AppColors.divider, width: selected ? 2 : 1),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
@@ -209,7 +209,7 @@ class _LangOption extends StatelessWidget {
               Text(subtitle, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
             ]),
             const Spacer(),
-            if (selected) const Icon(Icons.check_circle, color: AppColors.primaryLight),
+            if (selected) const Icon(Icons.check_circle, color: AppColors.primary),
           ],
         ),
       ),

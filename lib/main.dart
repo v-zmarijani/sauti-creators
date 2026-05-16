@@ -31,7 +31,7 @@ class SautiApp extends StatelessWidget {
           return MaterialApp.router(
             title: 'Sauti',
             debugShowCheckedModeBanner: false,
-            theme: AppTheme.dark,
+            theme: AppTheme.light,
             locale: localeProvider.locale,
             supportedLocales: const [Locale('en'), Locale('sw')],
             localizationsDelegates: const [

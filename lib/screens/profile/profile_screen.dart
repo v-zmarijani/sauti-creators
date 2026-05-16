@@ -1,9 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+
+import 'package:google_fonts/google_fonts.dart';
 import '../../providers/auth_provider.dart';
 import '../../theme/app_theme.dart';
-import '../../l10n/app_localizations.dart';
 import '../../widgets/creator_avatar.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -32,124 +33,124 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
 
   bool get _isOwnProfile => widget.userId == 'me';
 
+  // Demo user for bypass mode
+  static final _demoUser = _DemoUser(
+    name: 'Amina Kibao',
+    username: 'aminakibao',
+    bio: 'Content creator from Dar es Salaam 🇹🇿\nBongo Flava | Comedy | Lifestyle',
+    followers: 12400,
+    following: 890,
+    posts: 48,
+  );
+
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    final user = context.watch<AuthProvider>().currentUser;
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        leading: _isOwnProfile ? null : IconButton(icon: const Icon(Icons.arrow_back_ios), onPressed: () => context.pop()),
-        title: Text(_isOwnProfile ? (user?.username ?? '') : 'Profile'),
-        actions: _isOwnProfile
-            ? [
-                IconButton(icon: const Icon(Icons.settings_outlined), onPressed: () => context.push('/settings')),
-                IconButton(icon: const Icon(Icons.bar_chart_outlined), onPressed: () => context.push('/earnings')),
-              ]
-            : null,
-      ),
-      body: user == null
-          ? const SizedBox.shrink()
-          : NestedScrollView(
-              headerSliverBuilder: (_, __) => [
-                SliverToBoxAdapter(
-                  child: Column(
+      body: NestedScrollView(
+        headerSliverBuilder: (_, __) => [
+          SliverAppBar(
+            backgroundColor: AppColors.background,
+            elevation: 0,
+            pinned: true,
+            leading: _isOwnProfile ? null : CupertinoButton(
+              padding: EdgeInsets.zero,
+              child: const Icon(CupertinoIcons.back, color: AppColors.primary),
+              onPressed: () => context.pop(),
+            ),
+            title: Text(_demoUser.username, style: GoogleFonts.dmSans(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.onBackground)),
+            actions: _isOwnProfile ? [
+              CupertinoButton(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: const Icon(CupertinoIcons.settings, color: AppColors.primary, size: 22),
+                onPressed: () => context.push('/settings'),
+              ),
+            ] : null,
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                const SizedBox(height: 8),
+                CreatorAvatar(name: _demoUser.name, radius: 46),
+                const SizedBox(height: 12),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text(_demoUser.name, style: GoogleFonts.dmSans(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.onBackground)),
+                  const SizedBox(width: 6),
+                  const Icon(Icons.verified_rounded, color: AppColors.verified, size: 18),
+                ]),
+                const SizedBox(height: 4),
+                Text('@${_demoUser.username}', style: GoogleFonts.dmSans(fontSize: 14, color: AppColors.textSecondary)),
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: Text(_demoUser.bio, textAlign: TextAlign.center, style: GoogleFonts.dmSans(fontSize: 13, color: AppColors.onSurface, height: 1.4)),
+                ),
+                const SizedBox(height: 20),
+                // Stats row
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  decoration: BoxDecoration(
+                    color: AppColors.surface,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2))],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const SizedBox(height: 20),
-                      CreatorAvatar(avatarUrl: user.avatarUrl, name: user.name, radius: 48),
-                      const SizedBox(height: 12),
-                      Text(user.name, style: Theme.of(context).textTheme.titleLarge),
-                      const SizedBox(height: 4),
-                      Text('@${user.username}', style: const TextStyle(color: AppColors.textSecondary, fontSize: 14)),
-                      if (user.bio != null) ...[
-                        const SizedBox(height: 8),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 32),
-                          child: Text(user.bio!, textAlign: TextAlign.center, style: const TextStyle(color: AppColors.onSurface, fontSize: 14)),
-                        ),
-                      ],
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _Stat(label: l10n.posts, value: user.postsCount),
-                          _Divider(),
-                          _Stat(label: l10n.followers, value: user.followersCount),
-                          _Divider(),
-                          _Stat(label: l10n.following, value: user.followingCount),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: _isOwnProfile
-                            ? OutlinedButton(
-                                onPressed: () {},
-                                style: OutlinedButton.styleFrom(minimumSize: const Size(double.infinity, 44)),
-                                child: Text(l10n.editProfile),
-                              )
-                            : Row(
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () => setState(() => _isFollowing = !_isFollowing),
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: _isFollowing ? AppColors.surfaceVariant : AppColors.primaryLight,
-                                        minimumSize: const Size(0, 44),
-                                      ),
-                                      child: Text(_isFollowing ? l10n.unfollow : l10n.follow),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: OutlinedButton(
-                                      onPressed: () {},
-                                      style: OutlinedButton.styleFrom(minimumSize: const Size(0, 44)),
-                                      child: Text(l10n.tipCreator),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                      ),
-                      const SizedBox(height: 16),
-                      if (_isOwnProfile)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: ElevatedButton.icon(
-                            onPressed: () => context.push('/live/my_channel'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.live,
-                              minimumSize: const Size(double.infinity, 44),
-                            ),
-                            icon: const Icon(Icons.live_tv, size: 18),
-                            label: Text(l10n.goLive),
-                          ),
-                        ),
-                      const SizedBox(height: 8),
+                      _Stat(label: 'Posts', value: _demoUser.posts),
+                      _VertDivider(),
+                      _Stat(label: 'Followers', value: _demoUser.followers),
+                      _VertDivider(),
+                      _Stat(label: 'Following', value: _demoUser.following),
                     ],
                   ),
                 ),
-                SliverPersistentHeader(
-                  pinned: true,
-                  delegate: _TabDelegate(TabBar(
-                    controller: _tabController,
-                    indicatorColor: AppColors.primaryLight,
-                    labelColor: AppColors.primaryLight,
-                    unselectedLabelColor: AppColors.textSecondary,
-                    tabs: const [Tab(icon: Icon(Icons.grid_on)), Tab(icon: Icon(Icons.video_collection_outlined))],
-                  )),
+                const SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: _isOwnProfile
+                      ? Row(children: [
+                          Expanded(child: _IosButton(label: 'Edit Profile', filled: false, onTap: () {})),
+                          const SizedBox(width: 10),
+                          Expanded(child: _IosButton(label: 'Go Live 🔴', filled: true, color: AppColors.live, onTap: () => context.push('/live/my_channel'))),
+                        ])
+                      : Row(children: [
+                          Expanded(child: _IosButton(label: _isFollowing ? 'Following' : 'Follow', filled: !_isFollowing, onTap: () => setState(() => _isFollowing = !_isFollowing))),
+                          const SizedBox(width: 10),
+                          Expanded(child: _IosButton(label: 'Tip 💰', filled: false, onTap: () {})),
+                        ]),
                 ),
+                const SizedBox(height: 16),
               ],
-              body: TabBarView(
-                controller: _tabController,
-                children: [
-                  _PostGrid(postCount: user.postsCount),
-                  _PostGrid(postCount: user.postsCount ~/ 2),
-                ],
-              ),
             ),
+          ),
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: _TabDelegate(TabBar(
+              controller: _tabController,
+              indicatorColor: AppColors.primary,
+              indicatorSize: TabBarIndicatorSize.label,
+              labelColor: AppColors.primary,
+              unselectedLabelColor: AppColors.textSecondary,
+              dividerColor: AppColors.divider,
+              tabs: const [Tab(icon: Icon(CupertinoIcons.grid, size: 20)), Tab(icon: Icon(CupertinoIcons.play_rectangle, size: 20))],
+            )),
+          ),
+        ],
+        body: TabBarView(
+          controller: _tabController,
+          children: [_Grid(count: _demoUser.posts), _Grid(count: _demoUser.posts ~/ 3)],
+        ),
+      ),
     );
   }
+}
+
+class _DemoUser {
+  final String name, username, bio;
+  final int followers, following, posts;
+  const _DemoUser({required this.name, required this.username, required this.bio, required this.followers, required this.following, required this.posts});
 }
 
 class _Stat extends StatelessWidget {
@@ -157,34 +158,59 @@ class _Stat extends StatelessWidget {
   final int value;
   const _Stat({required this.label, required this.value});
 
+  String _fmt(int n) => n >= 1000 ? '${(n / 1000).toStringAsFixed(1)}k' : '$n';
+
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          Text(_format(value), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white)),
-          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(_fmt(value), style: GoogleFonts.dmSans(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.onBackground)),
+          const SizedBox(height: 2),
+          Text(label, style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.textSecondary)),
         ],
       );
-
-  String _format(int n) => n >= 1000 ? '${(n / 1000).toStringAsFixed(1)}k' : '$n';
 }
 
-class _Divider extends StatelessWidget {
+class _VertDivider extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Container(width: 1, height: 32, color: AppColors.divider);
+  Widget build(BuildContext context) => Container(width: 0.5, height: 36, color: AppColors.divider);
 }
 
-class _PostGrid extends StatelessWidget {
-  final int postCount;
-  const _PostGrid({required this.postCount});
+class _IosButton extends StatelessWidget {
+  final String label;
+  final bool filled;
+  final Color color;
+  final VoidCallback onTap;
+
+  const _IosButton({required this.label, required this.filled, required this.onTap, this.color = AppColors.primary});
+
+  @override
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: onTap,
+        child: Container(
+          height: 40,
+          decoration: BoxDecoration(
+            color: filled ? color : Colors.transparent,
+            border: filled ? null : Border.all(color: AppColors.divider, width: 1),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          alignment: Alignment.center,
+          child: Text(label, style: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w600, color: filled ? Colors.white : AppColors.onBackground)),
+        ),
+      );
+}
+
+class _Grid extends StatelessWidget {
+  final int count;
+  const _Grid({required this.count});
 
   @override
   Widget build(BuildContext context) => GridView.builder(
-        padding: const EdgeInsets.all(2),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 2, mainAxisSpacing: 2),
-        itemCount: postCount,
+        padding: const EdgeInsets.all(1),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 1.5, mainAxisSpacing: 1.5),
+        itemCount: count,
         itemBuilder: (_, i) => Container(
           color: AppColors.surfaceVariant,
-          child: Center(child: Icon(i % 3 == 0 ? Icons.play_circle_outline : Icons.image_outlined, color: AppColors.textSecondary, size: 28)),
+          child: Center(child: Icon(i % 3 == 0 ? CupertinoIcons.play_fill : CupertinoIcons.photo, color: AppColors.textTertiary, size: 24)),
         ),
       );
 }
@@ -195,13 +221,10 @@ class _TabDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(_, __, ___) => Container(color: AppColors.background, child: tabBar);
-
   @override
   double get maxExtent => tabBar.preferredSize.height;
-
   @override
   double get minExtent => tabBar.preferredSize.height;
-
   @override
   bool shouldRebuild(_) => false;
 }

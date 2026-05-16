@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 72,
                     height: 72,
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(colors: [AppColors.primary, AppColors.primaryLight]),
+                      gradient: const LinearGradient(colors: [AppColors.primary, AppColors.primary]),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Icon(Icons.mic, color: Colors.white, size: 36),
@@ -101,12 +101,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {},
-                    child: Text(l10n.forgotPassword, style: const TextStyle(color: AppColors.primaryLight)),
+                    child: Text(l10n.forgotPassword, style: const TextStyle(color: AppColors.primary)),
                   ),
                 ),
                 const SizedBox(height: 24),
                 _loading
-                    ? const Center(child: CircularProgressIndicator(color: AppColors.primaryLight))
+                    ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
                     : ElevatedButton(onPressed: _login, child: Text(l10n.login)),
                 const SizedBox(height: 24),
                 Row(
@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text(l10n.dontHaveAccount, style: const TextStyle(color: AppColors.textSecondary)),
                     TextButton(
                       onPressed: () => context.go('/signup'),
-                      child: Text(l10n.signup, style: const TextStyle(color: AppColors.primaryLight, fontWeight: FontWeight.w600)),
+                      child: Text(l10n.signup, style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600)),
                     ),
                   ],
                 ),

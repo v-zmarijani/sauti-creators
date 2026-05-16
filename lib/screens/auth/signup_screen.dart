@@ -100,7 +100,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 const SizedBox(height: 32),
                 _loading
-                    ? const Center(child: CircularProgressIndicator(color: AppColors.primaryLight))
+                    ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
                     : ElevatedButton(onPressed: _signup, child: Text(l10n.signup)),
                 const SizedBox(height: 16),
                 Row(
@@ -109,7 +109,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     Text(l10n.alreadyHaveAccount, style: const TextStyle(color: AppColors.textSecondary)),
                     TextButton(
                       onPressed: () => context.go('/login'),
-                      child: Text(l10n.login, style: const TextStyle(color: AppColors.primaryLight, fontWeight: FontWeight.w600)),
+                      child: Text(l10n.login, style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600)),
                     ),
                   ],
                 ),

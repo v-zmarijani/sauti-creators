@@ -67,7 +67,7 @@ class _UploadScreenState extends State<UploadScreen> {
 
       if (mounted) {
         context.go('/feed');
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Post published!'), backgroundColor: AppColors.primaryLight));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Post published!'), backgroundColor: AppColors.primary));
       }
     } catch (e) {
       if (mounted) {
@@ -89,7 +89,7 @@ class _UploadScreenState extends State<UploadScreen> {
         actions: [
           TextButton(
             onPressed: _loading ? null : _post,
-            child: Text(l10n.post, style: const TextStyle(color: AppColors.primaryLight, fontWeight: FontWeight.w700, fontSize: 16)),
+            child: Text(l10n.post, style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 16)),
           ),
         ],
       ),
@@ -123,7 +123,7 @@ class _UploadScreenState extends State<UploadScreen> {
                         children: [
                           Container(
                             decoration: BoxDecoration(color: AppColors.surfaceVariant, borderRadius: BorderRadius.circular(16)),
-                            child: Center(child: Icon(_isVideo ? Icons.video_file_outlined : Icons.image_outlined, size: 52, color: AppColors.primaryLight)),
+                            child: Center(child: Icon(_isVideo ? Icons.video_file_outlined : Icons.image_outlined, size: 52, color: AppColors.primary)),
                           ),
                           Positioned(
                             top: 8, right: 8,
@@ -148,7 +148,7 @@ class _UploadScreenState extends State<UploadScreen> {
               decoration: InputDecoration(hintText: l10n.addCaption, alignLabelWithHint: true),
             ),
             const SizedBox(height: 24),
-            if (_loading) const Center(child: CircularProgressIndicator(color: AppColors.primaryLight)),
+            if (_loading) const Center(child: CircularProgressIndicator(color: AppColors.primary)),
           ],
         ),
       ),
@@ -165,9 +165,9 @@ class _UploadScreenState extends State<UploadScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(margin: const EdgeInsets.symmetric(vertical: 8), width: 40, height: 4, decoration: BoxDecoration(color: AppColors.divider, borderRadius: BorderRadius.circular(2))),
-            ListTile(leading: const Icon(Icons.photo_library_outlined, color: AppColors.primaryLight), title: Text(l10n.chooseFromGallery, style: const TextStyle(color: Colors.white)), onTap: () { Navigator.pop(context); _pickMedia(ImageSource.gallery); }),
-            ListTile(leading: const Icon(Icons.camera_alt_outlined, color: AppColors.primaryLight), title: Text(l10n.takePhoto, style: const TextStyle(color: Colors.white)), onTap: () { Navigator.pop(context); _pickMedia(ImageSource.camera); }),
-            ListTile(leading: const Icon(Icons.videocam_outlined, color: AppColors.primaryLight), title: Text(l10n.recordVideo, style: const TextStyle(color: Colors.white)), onTap: () { Navigator.pop(context); _pickMedia(ImageSource.camera, video: true); }),
+            ListTile(leading: const Icon(Icons.photo_library_outlined, color: AppColors.primary), title: Text(l10n.chooseFromGallery, style: const TextStyle(color: Colors.white)), onTap: () { Navigator.pop(context); _pickMedia(ImageSource.gallery); }),
+            ListTile(leading: const Icon(Icons.camera_alt_outlined, color: AppColors.primary), title: Text(l10n.takePhoto, style: const TextStyle(color: Colors.white)), onTap: () { Navigator.pop(context); _pickMedia(ImageSource.camera); }),
+            ListTile(leading: const Icon(Icons.videocam_outlined, color: AppColors.primary), title: Text(l10n.recordVideo, style: const TextStyle(color: Colors.white)), onTap: () { Navigator.pop(context); _pickMedia(ImageSource.camera, video: true); }),
             const SizedBox(height: 8),
           ],
         ),

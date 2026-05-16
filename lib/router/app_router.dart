@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+
 import '../providers/auth_provider.dart';
 import '../screens/splash_screen.dart';
 import '../screens/onboarding_screen.dart';
@@ -20,22 +20,8 @@ final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 GoRouter createRouter(AuthProvider authProvider) => GoRouter(
       navigatorKey: _rootNavigatorKey,
-      initialLocation: '/splash',
-      redirect: (context, state) {
-        final auth = context.read<AuthProvider>();
-        final isAuth = auth.isAuthenticated;
-        final isUnknown = auth.status == AuthStatus.unknown;
-        final location = state.uri.path;
-
-        if (isUnknown) return '/splash';
-        if (!isAuth && location != '/login' && location != '/signup' && location != '/onboarding' && location != '/splash') {
-          return '/onboarding';
-        }
-        if (isAuth && (location == '/login' || location == '/signup' || location == '/onboarding')) {
-          return '/feed';
-        }
-        return null;
-      },
+      initialLocation: '/feed',
+      // Auth bypassed for demo — re-enable redirect when Supabase is connected
       routes: [
         GoRoute(path: '/splash', builder: (_, __) => const SplashScreen()),
         GoRoute(path: '/onboarding', builder: (_, __) => const OnboardingScreen()),

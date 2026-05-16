@@ -19,7 +19,7 @@ class EarningsScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(colors: [AppColors.primary, AppColors.primaryLight], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                gradient: const LinearGradient(colors: [AppColors.primary, AppColors.primary], begin: Alignment.topLeft, end: Alignment.bottomRight),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -110,7 +110,7 @@ class _TransactionTile extends StatelessWidget {
               Text(transaction.name, style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.white)),
               Text(transaction.time, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
             ])),
-            Text(transaction.amount, style: const TextStyle(fontWeight: FontWeight.w700, color: AppColors.primaryLight)),
+            Text(transaction.amount, style: const TextStyle(fontWeight: FontWeight.w700, color: AppColors.primary)),
           ],
         ),
       );

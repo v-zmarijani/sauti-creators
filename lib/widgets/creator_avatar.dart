@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../theme/app_theme.dart';
 
 class CreatorAvatar extends StatelessWidget {
@@ -15,19 +16,27 @@ class CreatorAvatar extends StatelessWidget {
     return Stack(
       children: [
         Container(
+          padding: isLive ? const EdgeInsets.all(2) : EdgeInsets.zero,
           decoration: isLive
               ? BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.live, width: 2),
+                  gradient: const LinearGradient(colors: [AppColors.live, Color(0xFFFF6B35)]),
                 )
               : null,
-          child: CircleAvatar(
-            radius: radius,
-            backgroundColor: AppColors.primaryLight,
-            backgroundImage: avatarUrl != null ? CachedNetworkImageProvider(avatarUrl!) : null,
-            child: avatarUrl == null
-                ? Text(name.isNotEmpty ? name[0].toUpperCase() : '?', style: TextStyle(fontSize: radius * 0.7, fontWeight: FontWeight.bold, color: Colors.white))
-                : null,
+          child: Container(
+            padding: isLive ? const EdgeInsets.all(2) : EdgeInsets.zero,
+            decoration: isLive ? const BoxDecoration(color: AppColors.surface, shape: BoxShape.circle) : null,
+            child: CircleAvatar(
+              radius: radius,
+              backgroundColor: AppColors.primary.withValues(alpha: 0.15),
+              backgroundImage: avatarUrl != null ? CachedNetworkImageProvider(avatarUrl!) : null,
+              child: avatarUrl == null
+                  ? Text(
+                      name.isNotEmpty ? name[0].toUpperCase() : '?',
+                      style: GoogleFonts.dmSans(fontSize: radius * 0.65, fontWeight: FontWeight.w700, color: AppColors.primary),
+                    )
+                  : null,
+            ),
           ),
         ),
         if (isLive)
@@ -37,9 +46,9 @@ class CreatorAvatar extends StatelessWidget {
             right: 0,
             child: Center(
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
                 decoration: BoxDecoration(color: AppColors.live, borderRadius: BorderRadius.circular(4)),
-                child: const Text('LIVE', style: TextStyle(color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold)),
+                child: Text('LIVE', style: GoogleFonts.dmSans(color: Colors.white, fontSize: 7, fontWeight: FontWeight.w800, letterSpacing: 0.5)),
               ),
             ),
           ),

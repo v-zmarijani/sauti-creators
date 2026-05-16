@@ -7,11 +7,11 @@ class NotificationsScreen extends StatelessWidget {
 
   static final _items = [
     _Notif(icon: Icons.favorite, color: Colors.red, title: 'Amina Kibao liked your post', time: '2m ago'),
-    _Notif(icon: Icons.person_add_outlined, color: AppColors.primaryLight, title: 'John Mwita started following you', time: '15m ago'),
+    _Notif(icon: Icons.person_add_outlined, color: AppColors.primary, title: 'John Mwita started following you', time: '15m ago'),
     _Notif(icon: Icons.monetization_on, color: AppColors.tip, title: 'You received a Tsh 5,000 tip from Fatuma', time: '1h ago'),
     _Notif(icon: Icons.chat_bubble_outline, color: AppColors.accent, title: 'Peter commented on your video', time: '3h ago'),
     _Notif(icon: Icons.live_tv, color: AppColors.live, title: '3 people are waiting for your live session', time: '5h ago'),
-    _Notif(icon: Icons.subscriptions_outlined, color: AppColors.primaryLight, title: 'Mariam subscribed to your channel', time: '1d ago'),
+    _Notif(icon: Icons.subscriptions_outlined, color: AppColors.primary, title: 'Mariam subscribed to your channel', time: '1d ago'),
   ];
 
   @override

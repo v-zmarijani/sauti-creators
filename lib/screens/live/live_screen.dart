@@ -97,7 +97,7 @@ class _LiveScreenState extends State<LiveScreen> {
                               child: RichText(
                                 text: TextSpan(
                                   children: [
-                                    TextSpan(text: '${c.name} ', style: TextStyle(fontWeight: FontWeight.bold, color: c.isGold ? AppColors.tip : AppColors.primaryLight, fontSize: 13)),
+                                    TextSpan(text: '${c.name} ', style: TextStyle(fontWeight: FontWeight.bold, color: c.isGold ? AppColors.tip : AppColors.primary, fontSize: 13)),
                                     TextSpan(text: c.text, style: const TextStyle(color: Colors.white, fontSize: 13)),
                                   ],
                                 ),
@@ -124,7 +124,7 @@ class _LiveScreenState extends State<LiveScreen> {
                             fillColor: Colors.black45,
                             border: OutlineInputBorder(borderRadius: BorderRadius.circular(24), borderSide: BorderSide.none),
                             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                            suffixIcon: IconButton(icon: const Icon(Icons.send, color: AppColors.primaryLight, size: 20), onPressed: _sendComment),
+                            suffixIcon: IconButton(icon: const Icon(Icons.send, color: AppColors.primary, size: 20), onPressed: _sendComment),
                           ),
                           onSubmitted: (_) => _sendComment(),
                         ),
