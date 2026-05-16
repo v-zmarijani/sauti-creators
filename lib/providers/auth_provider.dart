@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/user_model.dart';
 import '../supabase/supabase_client.dart';
+
+final _googleSignIn = GoogleSignIn(
+  // Paste your Web Client ID from Google Cloud Console here
+  clientId: 'YOUR_GOOGLE_WEB_CLIENT_ID',
+  scopes: ['email', 'profile'],
+);
 
 enum AuthStatus { unknown, authenticated, unauthenticated }
 
@@ -76,7 +84,48 @@ class AuthProvider extends ChangeNotifier {
     await _loadProfile(userId);
   }
 
+  Future<void> signInWithGoogle() async {
+    final googleUser = await _googleSignIn.signIn();
+    if (googleUser == null) throw Exception('Google sign-in cancelled');
+
+    final googleAuth = await googleUser.authentication;
+    final idToken = googleAuth.idToken;
+    if (idToken == null) throw Exception('No ID token from Google');
+
+    final res = await supabase.auth.signInWithIdToken(
+      provider: OAuthProvider.google,
+      idToken: idToken,
+      accessToken: googleAuth.accessToken,
+    );
+
+    if (res.user == null) throw Exception('Supabase sign-in failed');
+
+    // Create profile row if first-time Google sign-in
+    final userId = res.user!.id;
+    final existing = await supabase.from('users').select('id').eq('id', userId).maybeSingle();
+    if (existing == null) {
+      final name = googleUser.displayName ?? 'Creator';
+      final username = googleUser.email.split('@').first.replaceAll(RegExp(r'[^a-zA-Z0-9_]'), '_');
+      await supabase.from('users').insert({
+        'id': userId,
+        'name': name,
+        'username': username,
+        'email': googleUser.email,
+        'avatar_url': googleUser.photoUrl,
+        'followers_count': 0,
+        'following_count': 0,
+        'posts_count': 0,
+        'total_earnings': 0.0,
+        'is_verified': false,
+        'created_at': DateTime.now().toIso8601String(),
+      });
+    }
+
+    await _loadProfile(userId);
+  }
+
   Future<void> signOut() async {
+    await _googleSignIn.signOut();
     await supabase.auth.signOut();
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
 import '../../theme/app_theme.dart';
@@ -24,6 +25,20 @@ class _LoginScreenState extends State<LoginScreen> {
     _emailCtrl.dispose();
     _passCtrl.dispose();
     super.dispose();
+  }
+
+  Future<void> _signInWithGoogle() async {
+    setState(() => _loading = true);
+    try {
+      await context.read<AuthProvider>().signInWithGoogle();
+      if (mounted) context.go('/feed');
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString()), backgroundColor: AppColors.error));
+      }
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
   }
 
   Future<void> _login() async {
@@ -108,6 +123,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 _loading
                     ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
                     : ElevatedButton(onPressed: _login, child: Text(l10n.login)),
+                const SizedBox(height: 16),
+                _OrDivider(),
+                const SizedBox(height: 16),
+                _GoogleSignInButton(onTap: _signInWithGoogle),
                 const SizedBox(height: 24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -126,4 +145,45 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+}
+
+class _OrDivider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Row(
+        children: [
+          const Expanded(child: Divider()),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Text('or', style: GoogleFonts.dmSans(color: AppColors.textSecondary, fontSize: 13)),
+          ),
+          const Expanded(child: Divider()),
+        ],
+      );
+}
+
+class _GoogleSignInButton extends StatelessWidget {
+  final VoidCallback onTap;
+  const _GoogleSignInButton({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: onTap,
+        child: Container(
+          height: 52,
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: AppColors.divider),
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2))],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('G', style: GoogleFonts.dmSans(fontSize: 20, fontWeight: FontWeight.w700, color: const Color(0xFF4285F4))),
+              const SizedBox(width: 10),
+              Text('Continue with Google', style: GoogleFonts.dmSans(fontSize: 15, fontWeight: FontWeight.w500, color: AppColors.onBackground)),
+            ],
+          ),
+        ),
+      );
 }
