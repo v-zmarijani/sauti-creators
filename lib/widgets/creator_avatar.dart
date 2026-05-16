@@ -25,7 +25,7 @@ class CreatorAvatar extends StatelessWidget {
               : null,
           child: Container(
             padding: isLive ? const EdgeInsets.all(2) : EdgeInsets.zero,
-            decoration: isLive ? const BoxDecoration(color: AppColors.surface, shape: BoxShape.circle) : null,
+            decoration: isLive ? BoxDecoration(color: context.colors.surface, shape: BoxShape.circle) : null,
             child: CircleAvatar(
               radius: radius,
               backgroundColor: AppColors.primary.withValues(alpha: 0.15),

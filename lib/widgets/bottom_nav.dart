@@ -23,7 +23,7 @@ class BottomNavShell extends StatelessWidget {
     final currentIndex = _locationToIndex(location);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.colors.background,
       body: child,
       bottomNavigationBar: _IosTabBar(
         currentIndex: currentIndex,
@@ -53,8 +53,8 @@ class _IosTabBar extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.surface.withValues(alpha: 0.85),
-            border: const Border(top: BorderSide(color: AppColors.divider, width: 0.5)),
+            color: context.colors.surface.withValues(alpha: 0.85),
+            border: Border(top: BorderSide(color: context.colors.divider, width: 0.5)),
           ),
           child: SafeArea(
             top: false,
